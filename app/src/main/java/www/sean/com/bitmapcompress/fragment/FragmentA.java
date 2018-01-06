@@ -28,6 +28,7 @@ public class FragmentA extends Fragment implements MyImageView.TextListener {
         TextView text = view.findViewById(R.id.text);
         text.setText("质量压缩");
         MyImageView imageView = view.findViewById(R.id.imageview);
+        imageView.setListener(this);
         tvSize = view.findViewById(R.id.size);
 
         return view;

@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import www.sean.com.bitmapcompress.fragment.FragmentA;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +31,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mViewPager = findViewById(R.id.viewpager);
+        List<Fragment> list = new ArrayList<>();
+        list.add(new FragmentA());
+        FragAdapter adapter = new FragAdapter(list,getSupportFragmentManager());
 
+        mViewPager.setAdapter(adapter);
     }
 }
 
