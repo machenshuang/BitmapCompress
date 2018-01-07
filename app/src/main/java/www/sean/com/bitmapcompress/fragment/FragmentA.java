@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import www.sean.com.bitmapcompress.view.MyImageView;
 public class FragmentA extends Fragment implements MyImageView.TextListener {
 
     private TextView tvSize;
+    private TextView tvSrcSize;
 
     @Nullable
     @Override
@@ -30,12 +32,15 @@ public class FragmentA extends Fragment implements MyImageView.TextListener {
         MyImageView imageView = view.findViewById(R.id.imageview);
         imageView.setListener(this);
         tvSize = view.findViewById(R.id.size);
+        tvSrcSize = view.findViewById(R.id.src_size);
 
         return view;
     }
 
+
     @Override
-    public void showText(String text) {
-        tvSize.setText(text);
+    public void showText(String srcSize, String size) {
+        tvSize.setText(size);
+        tvSrcSize.setText(srcSize);
     }
 }

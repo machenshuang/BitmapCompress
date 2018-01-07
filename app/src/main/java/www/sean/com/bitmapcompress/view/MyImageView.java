@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
@@ -25,13 +26,14 @@ import www.sean.com.bitmapcompress.R;
  */
 
 @SuppressLint("AppCompatCustomView")
-public class MyImageView extends ImageView {
+public class MyImageView extends View {
 
     private Bitmap mSrcBitmap;
     private TextListener mListener;
     private Paint mBitPaint;
     private int mType;
     private Rect mSrcRect, mDestRect;
+    private String mSrcSize;
 
     public MyImageView(Context context) {
         this(context,null);
@@ -47,25 +49,15 @@ public class MyImageView extends ImageView {
 
     public MyImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        compressQuality();
         init();
     }
 
     private void init(){
-        /*ViewGroup.LayoutParams params = this.getLayoutParams();
-        params.height=200;
-        params.width =100;
-        this.setLayoutParams(params);*/
-
+        Log.d("MyImageView","init");
         mBitPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBitPaint.setFilterBitmap(true);
         mBitPaint.setDither(true);
-
-        mSrcRect = new Rect(0, 0, mSrcBitmap.getWidth(), mSrcBitmap.getHeight());
-        mDestRect = new Rect(0, 0, 200, 300);
-        if (mListener!=null){
-            mListener.showText(mSrcBitmap.getByteCount()+"");
-        }
+        compressQuality();
 
 
     }
@@ -76,30 +68,36 @@ public class MyImageView extends ImageView {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        Log.d("MyImageView","onMeasure");
+    }
+
+    @SuppressLint("DrawAllocation")
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        if (mSrcBitmap!=null){
-            canvas.drawBitmap(mSrcBitmap,mSrcRect,mDestRect,mBitPaint);
+        mSrcRect = new Rect(0, 0, mSrcBitmap.getWidth(), mSrcBitmap.getHeight());
+        mDestRect = new Rect(0, 0, 600, 900);
+        Log.d("MyImageView","onDraw");
+        if (mListener!=null){
+            Log.d("MyImageView",mSrcBitmap.getByteCount()+"");
+            mListener.showText(mSrcSize,mSrcBitmap.getByteCount()+"byte");
         }
-
-
+        canvas.drawBitmap(mSrcBitmap,mSrcRect,mDestRect,mBitPaint);
     }
 
     private void compressQuality(){
         Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test);
-        Log.d("MyImageView","图片原始大小："+bm.getByteCount());
+        mSrcSize = bm.getByteCount()+"byte";
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,50,bos);
+        bm.compress(Bitmap.CompressFormat.JPEG,100,bos);
         byte[] bytes = bos.toByteArray();
         mSrcBitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-        if (mListener!=null){
-            mListener.showText(mSrcBitmap.getByteCount()+"");
-        }
 
-        invalidate();
     }
 
     public interface TextListener{
-        void showText(String text);
+        void showText(String srcSize,String size);
     }
 }
