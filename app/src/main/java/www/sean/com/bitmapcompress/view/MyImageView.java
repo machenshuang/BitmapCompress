@@ -11,6 +11,7 @@ import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ public class MyImageView extends View {
     private int mType;
     private Rect mSrcRect, mDestRect;
     private String mSrcSize;
+    private int screenWidth;
+    private Context mContext;
 
     public MyImageView(Context context) {
         this(context,null);
@@ -49,6 +52,7 @@ public class MyImageView extends View {
 
     public MyImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
         init();
     }
 
@@ -57,6 +61,8 @@ public class MyImageView extends View {
         mBitPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBitPaint.setFilterBitmap(true);
         mBitPaint.setDither(true);
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        screenWidth = dm.widthPixels;
         compressQuality();
 
 
@@ -70,7 +76,6 @@ public class MyImageView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        Log.d("MyImageView","onMeasure");
     }
 
     @SuppressLint("DrawAllocation")
@@ -78,10 +83,8 @@ public class MyImageView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mSrcRect = new Rect(0, 0, mSrcBitmap.getWidth(), mSrcBitmap.getHeight());
-        mDestRect = new Rect(0, 0, 600, 900);
-        Log.d("MyImageView","onDraw");
+        mDestRect = new Rect(screenWidth/2-300, 0, screenWidth/2+300, 900);
         if (mListener!=null){
-            Log.d("MyImageView",mSrcBitmap.getByteCount()+"");
             mListener.showText(mSrcSize,mSrcBitmap.getByteCount()+"byte");
         }
         canvas.drawBitmap(mSrcBitmap,mSrcRect,mDestRect,mBitPaint);
@@ -94,8 +97,9 @@ public class MyImageView extends View {
         bm.compress(Bitmap.CompressFormat.JPEG,100,bos);
         byte[] bytes = bos.toByteArray();
         mSrcBitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-
     }
+
+
 
     public interface TextListener{
         void showText(String srcSize,String size);
