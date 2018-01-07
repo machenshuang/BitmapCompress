@@ -68,7 +68,6 @@ public class MyImageView extends View {
 
     }
 
-
     public void setType(int type){
         mType = type;
     }
@@ -99,7 +98,10 @@ public class MyImageView extends View {
         mSrcBitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
     }
 
-
+    private void compressSampling(){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+    }
 
     public interface TextListener{
         void showText(String srcSize,String size);
