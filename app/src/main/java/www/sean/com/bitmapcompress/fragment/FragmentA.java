@@ -13,6 +13,9 @@ import android.widget.TextView;
 import www.sean.com.bitmapcompress.R;
 import www.sean.com.bitmapcompress.view.MyImageView;
 
+import static www.sean.com.bitmapcompress.Constants.COMPRESS_QUALITY;
+import static www.sean.com.bitmapcompress.Constants.COMPRESS_SAMPLING;
+
 /**
  * 加载原图的Fragment
  * Created by SeanMa on 2018/1/4.
@@ -31,6 +34,7 @@ public class FragmentA extends Fragment implements MyImageView.TextListener {
         text.setText("质量压缩");
         MyImageView imageView = view.findViewById(R.id.imageview);
         imageView.setListener(this);
+        imageView.setCompressType(COMPRESS_QUALITY);
         tvSize = view.findViewById(R.id.size);
         tvSrcSize = view.findViewById(R.id.src_size);
 

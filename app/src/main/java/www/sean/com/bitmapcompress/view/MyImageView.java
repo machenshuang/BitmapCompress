@@ -21,6 +21,9 @@ import java.io.ByteArrayOutputStream;
 
 import www.sean.com.bitmapcompress.R;
 
+import static www.sean.com.bitmapcompress.Constants.COMPRESS_QUALITY;
+import static www.sean.com.bitmapcompress.Constants.COMPRESS_SAMPLING;
+
 /**
  * 自定义ImageView
  * Created by SeanMa on 2018/1/4.
@@ -57,19 +60,31 @@ public class MyImageView extends View {
     }
 
     private void init(){
-        Log.d("MyImageView","init");
         mBitPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mBitPaint.setFilterBitmap(true);
         mBitPaint.setDither(true);
         DisplayMetrics dm = getResources().getDisplayMetrics();
         screenWidth = dm.widthPixels;
         compressQuality();
-
-
     }
 
-    public void setType(int type){
+    public void setCompressType(int type){
         mType = type;
+        switchCompressWay(mType);
+        invalidate();
+    }
+
+    private void switchCompressWay(int type){
+        switch (type){
+            case COMPRESS_QUALITY :
+                compressQuality();
+                break;
+            case COMPRESS_SAMPLING:
+                compressSampling();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -101,6 +116,7 @@ public class MyImageView extends View {
     private void compressSampling(){
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 2;
+        mSrcBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.test,options);
     }
 
     public interface TextListener{
