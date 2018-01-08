@@ -24,6 +24,7 @@ import www.sean.com.bitmapcompress.R;
 
 import static www.sean.com.bitmapcompress.Constants.COMPRESS_MATRIX;
 import static www.sean.com.bitmapcompress.Constants.COMPRESS_QUALITY;
+import static www.sean.com.bitmapcompress.Constants.COMPRESS_RGB_565;
 import static www.sean.com.bitmapcompress.Constants.COMPRESS_SAMPLING;
 
 /**
@@ -87,6 +88,8 @@ public class MyImageView extends View {
             case COMPRESS_MATRIX:
                 compressMatrix();
                 break;
+            case COMPRESS_RGB_565:
+                compressRGB565();
             default:
                 break;
         }
@@ -130,6 +133,13 @@ public class MyImageView extends View {
         Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.test);
         mSrcBitmap = Bitmap.createBitmap(bm,0,0,bm.getWidth(),bm.getHeight(),matrix,true);
         bm = null;
+    }
+
+    private void compressRGB565(){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        mSrcBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.test,options);
+
     }
 
     public interface TextListener{
