@@ -17,6 +17,7 @@ import www.sean.com.bitmapcompress.fragment.FragmentA;
 import www.sean.com.bitmapcompress.fragment.FragmentB;
 import www.sean.com.bitmapcompress.fragment.FragmentC;
 import www.sean.com.bitmapcompress.fragment.FragmentD;
+import www.sean.com.bitmapcompress.fragment.FragmentE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         list.add(new FragmentB());
         list.add(new FragmentC());
         list.add(new FragmentD());
+        list.add(new FragmentE());
         FragAdapter adapter = new FragAdapter(list,getSupportFragmentManager());
 
         mViewPager.setAdapter(adapter);

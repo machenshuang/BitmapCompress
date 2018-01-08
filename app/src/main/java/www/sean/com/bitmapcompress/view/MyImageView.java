@@ -26,6 +26,7 @@ import static www.sean.com.bitmapcompress.Constants.COMPRESS_MATRIX;
 import static www.sean.com.bitmapcompress.Constants.COMPRESS_QUALITY;
 import static www.sean.com.bitmapcompress.Constants.COMPRESS_RGB_565;
 import static www.sean.com.bitmapcompress.Constants.COMPRESS_SAMPLING;
+import static www.sean.com.bitmapcompress.Constants.COMPRESS_SCALE;
 
 /**
  * 自定义ImageView
@@ -90,6 +91,8 @@ public class MyImageView extends View {
                 break;
             case COMPRESS_RGB_565:
                 compressRGB565();
+            case COMPRESS_SCALE:
+                compressScaleBitmap();
             default:
                 break;
         }
@@ -139,7 +142,12 @@ public class MyImageView extends View {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.RGB_565;
         mSrcBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.test,options);
+    }
 
+    private void compressScaleBitmap(){
+        Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.test);
+        mSrcBitmap = Bitmap.createScaledBitmap(bm,600,900,true);
+        bm = null;
     }
 
     public interface TextListener{
