@@ -3,38 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
     <TextView
+        android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:maxLines="1"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
         android:ellipsize="end"
         android:gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:maxLines="1"
         android:text="Hello"
-        android:id="@+id/text"
+        android:textSize="24sp"
         tools:ignore="HardcodedText" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
             android:text="原始大小:"
+            android:textSize="16sp"
             tools:ignore="HardcodedText" />
+
         <TextView
+            android:id="@+id/src_size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:id="@+id/src_size"/>
+            android:textSize="16sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -42,27 +45,28 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
             android:text="压缩大小:"
+            android:textSize="16sp"
             tools:ignore="HardcodedText" />
+
         <TextView
+            android:id="@+id/size"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:id="@+id/size"/>
+            android:textSize="16sp" />
     </LinearLayout>
 
     <www.sean.com.bitmapcompress.view.MyImageView
+        android:id="@+id/imageview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/imageview" />
-
+        android:layout_gravity="center_horizontal" />
 
 
 </LinearLayout>

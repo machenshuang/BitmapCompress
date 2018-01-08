@@ -11,14 +11,13 @@ import android.widget.TextView;
 import www.sean.com.bitmapcompress.R;
 import www.sean.com.bitmapcompress.view.MyImageView;
 
-import static www.sean.com.bitmapcompress.Constants.COMPRESS_QUALITY;
 import static www.sean.com.bitmapcompress.Constants.COMPRESS_SCALE;
 
 /**
  * Created by SeanMa on 2018/1/8.
  */
 
-public class FragmentE extends Fragment implements MyImageView.TextListener{
+public class FragmentE extends Fragment implements MyImageView.TextListener {
 
 
     private TextView tvSize;
@@ -27,7 +26,7 @@ public class FragmentE extends Fragment implements MyImageView.TextListener{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_page,container,false);
+        View view = inflater.inflate(R.layout.layout_page, container, false);
         TextView text = view.findViewById(R.id.text);
         text.setText("Scale压缩");
         MyImageView imageView = view.findViewById(R.id.imageview);

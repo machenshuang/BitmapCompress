@@ -1,14 +1,12 @@
 package www.sean.com.bitmapcompress;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,17 +39,17 @@ public class MainActivity extends AppCompatActivity {
         list.add(new FragmentC());
         list.add(new FragmentD());
         list.add(new FragmentE());
-        FragAdapter adapter = new FragAdapter(list,getSupportFragmentManager());
+        FragAdapter adapter = new FragAdapter(list, getSupportFragmentManager());
 
         mViewPager.setAdapter(adapter);
     }
 }
 
-class FragAdapter extends FragmentPagerAdapter{
+class FragAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> mFragments;
 
-    public FragAdapter(List<Fragment> fragments,FragmentManager fm) {
+    public FragAdapter(List<Fragment> fragments, FragmentManager fm) {
         super(fm);
         mFragments = fragments;
     }
