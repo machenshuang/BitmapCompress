@@ -7,5 +7,5 @@ package www.sean.com.bitmapcompress;
 public class Constants {
     public static final int COMPRESS_QUALITY = 1;
     public static final int COMPRESS_SAMPLING = 2;
-
+    public static final int COMPRESS_MATRIX = 3;
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 
 import www.sean.com.bitmapcompress.R;
 
+import static www.sean.com.bitmapcompress.Constants.COMPRESS_MATRIX;
 import static www.sean.com.bitmapcompress.Constants.COMPRESS_QUALITY;
 import static www.sean.com.bitmapcompress.Constants.COMPRESS_SAMPLING;
 
@@ -82,6 +84,9 @@ public class MyImageView extends View {
             case COMPRESS_SAMPLING:
                 compressSampling();
                 break;
+            case COMPRESS_MATRIX:
+                compressMatrix();
+                break;
             default:
                 break;
         }
@@ -117,6 +122,14 @@ public class MyImageView extends View {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 2;
         mSrcBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.test,options);
+    }
+
+    private void compressMatrix(){
+        Matrix matrix = new Matrix();
+        matrix.setScale(0.5f,0.5f);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.test);
+        mSrcBitmap = Bitmap.createBitmap(bm,0,0,bm.getWidth(),bm.getHeight(),matrix,true);
+        bm = null;
     }
 
     public interface TextListener{
