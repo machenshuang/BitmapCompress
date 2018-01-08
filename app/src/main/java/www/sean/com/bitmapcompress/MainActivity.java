@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import www.sean.com.bitmapcompress.fragment.FragmentA;
+import www.sean.com.bitmapcompress.fragment.FragmentB;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.viewpager);
         List<Fragment> list = new ArrayList<>();
         list.add(new FragmentA());
+        list.add(new FragmentB());
         FragAdapter adapter = new FragAdapter(list,getSupportFragmentManager());
 
         mViewPager.setAdapter(adapter);
