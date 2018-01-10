@@ -102,7 +102,7 @@ RGB_565  | 每个像素存储在2个字节中，只有RGB通道被编码：红�
 
 
 ### 四、效果图
-![show.gif](https://user-gold-cdn.xitu.io/2018/1/10/160e029a93e11e57?w=462&h=856&f=gif&s=563516)
+![image](gif/show.gif)
 
 
 ### 五、总结
