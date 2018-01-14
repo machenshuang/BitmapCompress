@@ -14,6 +14,7 @@ import www.sean.com.bitmapcompress.view.MyImageView;
 import static www.sean.com.bitmapcompress.Constants.COMPRESS_RGB_565;
 
 /**
+ * RGB565压缩
  * Created by SeanMa on 2018/1/8.
  */
 
