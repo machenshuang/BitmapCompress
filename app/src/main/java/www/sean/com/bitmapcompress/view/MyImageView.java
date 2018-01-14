@@ -34,11 +34,8 @@ public class MyImageView extends View {
     private Bitmap mSrcBitmap;
     private TextListener mListener;
     private Paint mBitPaint;
-    private int mType;
-    private Rect mSrcRect, mDestRect;
     private String mSrcSize;
     private int screenWidth;
-    private Context mContext;
 
     public MyImageView(Context context) {
         this(context, null);
@@ -50,7 +47,6 @@ public class MyImageView extends View {
 
     public MyImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext = context;
         init();
     }
 
@@ -68,8 +64,7 @@ public class MyImageView extends View {
     }
 
     public void setCompressType(int type) {
-        mType = type;
-        switchCompressWay(mType);
+        switchCompressWay(type);
         invalidate();
     }
 
@@ -102,8 +97,8 @@ public class MyImageView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        mSrcRect = new Rect(0, 0, mSrcBitmap.getWidth(), mSrcBitmap.getHeight());
-        mDestRect = new Rect(screenWidth / 2 - 300, 0, screenWidth / 2 + 300, 900);
+        Rect mSrcRect = new Rect(0, 0, mSrcBitmap.getWidth(), mSrcBitmap.getHeight());
+        Rect mDestRect = new Rect(screenWidth / 2 - 300, 0, screenWidth / 2 + 300, 900);
         if (mListener != null) {
             mListener.showText(mSrcSize, mSrcBitmap.getByteCount() + "byte");
         }
@@ -130,7 +125,7 @@ public class MyImageView extends View {
         matrix.setScale(0.5f, 0.5f);
         Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test);
         mSrcBitmap = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-        bm = null;
+        bm.recycle();
     }
 
     private void compressRGB565() {
@@ -142,7 +137,7 @@ public class MyImageView extends View {
     private void compressScaleBitmap() {
         Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test);
         mSrcBitmap = Bitmap.createScaledBitmap(bm, 600, 900, true);
-        bm = null;
+        bm.recycle();
     }
 
     public interface TextListener {

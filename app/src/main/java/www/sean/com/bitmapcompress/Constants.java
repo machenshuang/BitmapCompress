@@ -1,6 +1,7 @@
 package www.sean.com.bitmapcompress;
 
 /**
+ * 常量类
  * Created by SeanMa on 2018/1/8.
  */
 
